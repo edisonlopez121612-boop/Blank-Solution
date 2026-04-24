@@ -1,0 +1,6 @@
+@BluesoftBank.API_HostAddress = http://localhost:5171
+
+GET {{BluesoftBank.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
