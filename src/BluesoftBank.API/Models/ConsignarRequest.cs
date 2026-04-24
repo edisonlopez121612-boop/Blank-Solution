@@ -2,6 +2,6 @@
 {
     public class ConsignarRequest
     {
-        public decimal SaldoInicial { get; set; }
+        public decimal ValorConsiignacion { get; set; }
     }
 }

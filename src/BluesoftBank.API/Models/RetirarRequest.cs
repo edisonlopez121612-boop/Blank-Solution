@@ -2,7 +2,7 @@
 {
     public class RetirarRequest
     {
-        public decimal Valor { get; set; }
+        public decimal ValorRetiro { get; set; }
         public string CiudadOperacion { get; set; }
     }
 }

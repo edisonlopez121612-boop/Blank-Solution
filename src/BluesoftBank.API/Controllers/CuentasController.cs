@@ -19,41 +19,40 @@ public class CuentasController : ControllerBase
     public async Task<IActionResult> Crear([FromBody] CrearCuentaRequest request)
     {
         await _service.CrearCuentaAsync(request.NumeroCuenta, request.SaldoInicial, request.CiudadOrigen);
-
         return Ok();
     }
 
-    [HttpPost("{numero}/consignar")]
-    public async Task<IActionResult> Consignar(string numero, [FromBody] ConsignarRequest request)
+    [HttpPost("{NumeroCuenta}/consignar")]
+    public async Task<IActionResult> Consignar(string NumeroCuenta, [FromBody] ConsignarRequest request)
     {
-        await _service.ConsignarAsync(numero, request.SaldoInicial);
+        await _service.ConsignarAsync(NumeroCuenta, request.ValorConsiignacion);
         return Ok();
     }
-    [HttpPost("{numero}/retirar")]
-    public async Task<IActionResult> Retirar(string numero, [FromBody] RetirarRequest request)
+    [HttpPost("{NumeroCuenta}/retirar")]
+    public async Task<IActionResult> Retirar(string NumeroCuenta, [FromBody] RetirarRequest request)
     {
-        await _service.RetirarAsync(numero, request.Valor, request.CiudadOperacion);
+        await _service.RetirarAsync(NumeroCuenta, request.ValorRetiro, request.CiudadOperacion);
         return Ok();
     }
 
-    [HttpGet("{numero}/saldo")]
-    public async Task<IActionResult> Saldo(string numero)
+    [HttpGet("{NumeroCuenta}/saldo")]
+    public async Task<IActionResult> Saldo(string NumeroCuenta)
     {
-        var saldo = await _service.ConsultarSaldoAsync(numero);
+        var saldo = await _service.ConsultarSaldoAsync(NumeroCuenta);
         return Ok(saldo);
     }
 
-    [HttpGet("{numero}/movimientos")]
-    public async Task<IActionResult> Movimientos(string numero)
+    [HttpGet("{NumeroCuenta}/movimientos")]
+    public async Task<IActionResult> Movimientos(string NumeroCuenta)
     {
-        var movimientos = await _service.ConsultarMovimientosAsync(numero);
+        var movimientos = await _service.ConsultarMovimientosAsync(NumeroCuenta);
         return Ok(movimientos);
     }
 
-    [HttpGet("{numero}/extracto")]
-    public async Task<IActionResult> Extracto(string numero, int mes, int anio)
+    [HttpGet("{NumeroCuenta}/extracto")]
+    public async Task<IActionResult> Extracto(string NumeroCuenta, int mes, int anio)
     {
-        var result = await _service.GenerarExtractoMensualAsync(numero, mes, anio);
+        var result = await _service.GenerarExtractoMensualAsync(NumeroCuenta, mes, anio);
         return Ok(result);
     }
 }
